@@ -23,7 +23,7 @@ public class A3Tester {
 		// testAddFront();
 		// testAddBack();
 		// testSizeAndIsEmpty();
-		 testRemoveFront();
+		// testRemoveFront();
 		 testRemoveBack();
 		
 		/* Part 2 */
@@ -118,12 +118,43 @@ public class A3Tester {
 		
 		   You should also ensure that your size and isEmpty 
 		   methods work with removal as well as addition */
-				
+		
+		A3LinkedList list2 = new A3LinkedList();
+		list2.addBack("P");
+		list2.removeFront();
+		result = list2.frontToBack();
+		displayResults(result.equals("{}"), "testRemoveFront, 1 element");
+
+		A3LinkedList list3 = new A3LinkedList();
+		list3.removeFront();
+		result = list3.frontToBack();
+		displayResults(result.equals("{}"), "testRemoveFront, 0 element");
 	}
 	
 	public static void testRemoveBack() {
 		System.out.println("\nTesting removeBack...");
 		// Write all of your own tests here 
+		A3LinkedList list1 = new A3LinkedList();
+		list1.addBack("P");
+		list1.addBack("I");
+		list1.addBack("N");
+		list1.addBack("K");
+		
+		list1.removeBack();
+		String result = list1.backToFront();
+		displayResults(result.equals("{NIP}"), "testRemoveFront");
+
+
+		A3LinkedList list2 = new A3LinkedList();
+		list2.addBack("P");
+		list2.removeBack();
+		result = list2.backToFront();
+		displayResults(result.equals("{}"), "testRemoveBack, 1 element");
+
+		A3LinkedList list3 = new A3LinkedList();
+		list3.removeBack();
+		result = list3.backToFront();
+		displayResults(result.equals("{}"), "testRemoveBack, 0 element");
 	}
 	
 	public static void testRemoveMiddle() {
@@ -169,7 +200,19 @@ public class A3Tester {
 		
 		// Write additional tests here to ensure all of your pointers
 		// and other fields have been updated correctly.
-				
+
+		A3LinkedList test1 = new A3LinkedList();		
+		test1.removeMiddle();
+		result1 = list1.frontToBack();
+		displayResults(result1.equals("{}"), "length 0 test");
+
+		A3LinkedList test2 = new A3LinkedList();		
+		test2.addBack("A");
+		test2.addBack("B");
+		test2.removeMiddle();
+		
+		result1 = list1.frontToBack();
+		displayResults(result1.equals("{}"), "length 2 test");
 	}
 	
 	
@@ -203,12 +246,51 @@ public class A3Tester {
 		list1.interleave(list2);
 		result1 = list1.frontToBack();
 		result2 = list2.frontToBack();
+
+		String result1b = list1.backToFront();
+		String result2b = list2.backToFront();
+		
 		displayResults(result1.equals("{AMCOEQG}"), "after interleave, first list now contains AMCOEQG");
 		displayResults(result2.equals("{LBNDPFR}"), "after interleave, second list now contains LBNDPFR");
 
 		// Write additional tests here to ensure all of your pointers
 		// have been updated correctly.
+
+		// Even numbers of elements test
+		A3LinkedList test1list1 = new A3LinkedList();
+		A3LinkedList test1list2 = new A3LinkedList();
 		
+		test1list1.addBack("A");
+		test1list1.addBack("B");
+		test1list1.addBack("C");
+		test1list1.addBack("D");
+		test1list1.addBack("E");
+		test1list1.addBack("F");
+
+		test1list2.addBack("L");
+		test1list2.addBack("M");
+		test1list2.addBack("N");
+		test1list2.addBack("O");
+		test1list2.addBack("P");
+		test1list2.addBack("Q");
+
+		test1list1.interleave(test1list2);
+		result1 = test1list1.frontToBack();
+		result2 = test1list2.frontToBack();
+		displayResults(result1.equals("{AMCOEQ}"), "after interleave, even test");
+		displayResults(result2.equals("{LBNDPF}"), "after interleave, even test");
+
+		A3LinkedList test2list1 = new A3LinkedList();
+		A3LinkedList test2list2 = new A3LinkedList();
+		
+		test2list1.addBack("A");
+		test2list2.addBack("B");
+
+		test2list1.interleave(test2list2);
+		result1 = test2list1.frontToBack();
+		result2 = test2list2.frontToBack();
+		displayResults(result1.equals("{A}"), "after interleave, one element test");
+		displayResults(result2.equals("{B}"), "after interleave, one element test");
 	}
 	
 	public static void displayResults (boolean passed, String testName) {

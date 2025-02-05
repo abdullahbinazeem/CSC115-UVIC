@@ -1,5 +1,5 @@
-// Name:
-// Student number: v00
+// Name: Abdullah Azeen
+// Student number: v01053750
 
 public class A3LinkedList implements A3List {
 	private A3Node head;
@@ -55,17 +55,41 @@ public class A3LinkedList implements A3List {
 	public boolean isEmpty() {
 		return length==0;
 	}
+
+	//Added Function by Student for interleave
+	public A3Node getHead() {
+		return head;
+	}
 	
 	public void removeFront() {
-		head = head.getNext();
-		head.getPrev().setNext(null);
-		head.setPrev(null);
+		if(head == null) {
+			return;
+		}
+
+		if(head.getNext() == null){
+			head = null;
+			tail = null;
+		} else {
+			head = head.getNext();
+			head.getPrev().setNext(null);
+			head.setPrev(null);
+		}
+		
 	}
 	
 	public void removeBack() {
-		tail = tail.getPrev();
-		tail.getNext().setPrev(null);
-		tail.setNext(null);
+		if(head == null) {
+			return;
+		} 
+
+		if(head.getNext() == null){
+			head = null;
+			tail = null;
+		} else {
+			tail = tail.getPrev();
+			tail.getNext().setPrev(null);
+			tail.setNext(null);
+		}
 	}
 	
 	
@@ -75,12 +99,73 @@ public class A3LinkedList implements A3List {
 	//////////////////
 	
 	public void removeMiddle() {
-		// TODO: implement this
+		//Do nothing if the list is already empty
+		if(length == 0 || head == null || tail == null) {
+			return;
+		}
+
+		//Checks if length is even or odd
+		if(length % 2 == 0) {
+			//Length is even
+
+			int steps = (length / 2) - 1;
+			A3Node cur = head;
+			//Find middle element - 1
+			for(int i = 0; i < steps; i++){
+				cur = cur.getNext();
+			}
+
+			//If only two elements, empy the list
+			if(cur.getNext().getNext() != null){
+				cur.getNext().getNext().setPrev(cur.getPrev());
+				cur.getPrev().setNext(cur.getNext().getNext());
+			} else {
+				head = null;
+				tail = null;
+			}
+		} else {
+			//Length is odd
+			
+			int steps = length / 2;
+			A3Node cur = head;
+			//Find middle elemnt
+			for(int i = 0; i < steps; i++){
+				cur = cur.getNext();
+			}
+			
+			//If only one elements, empy the list
+			if(cur.getNext() != null){
+				cur.getNext().setPrev(cur.getPrev());
+				cur.getPrev().setNext(cur.getNext());
+			} else {
+				head = null;
+				tail = null;
+			}
+		}
+		length--;
 	}
 	
 	
 	public void interleave(A3LinkedList other) {
-		// TODO: implement this
+		if(head == null) {
+			return;
+		}
+
+		A3Node listCur = head;
+		A3Node otherCur = other.getHead();
+		for(int i = 0; i < (other.size()-1); i++){
+			listCur.getNext().setPrev(otherCur);
+			otherCur.getNext().setPrev(listCur);
+
+			A3Node curNext = listCur.getNext();
+			A3Node otherNext = otherCur.getNext();
+
+			listCur.setNext(otherCur.getNext());
+			otherCur.setNext(curNext);
+			
+			otherCur = otherNext;
+			listCur = curNext;
+		}
 	}
 	
 	
