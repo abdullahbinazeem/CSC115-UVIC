@@ -14,8 +14,8 @@ public class A4Tester {
 		testCanCross();
 		
 		/* Part 2: Implementing the Generic Stack ADT */
-		// testStackOperations();
-		// testStackIsGeneric();
+		 testStackOperations();
+		 testStackIsGeneric();
 		
 		System.out.println("Passed " + testPassCount + " / " + testCount + " tests");
 	}
@@ -152,7 +152,7 @@ public class A4Tester {
 		displayResults(result==expected, "Number of rocks that can fit "+n+" in rc2");
 		
 		// Add more tests here
-		
+		// Edge case: All rocks have the same size
 	}
 	
 	public static void testGetTallest() {
@@ -197,6 +197,7 @@ public class A4Tester {
 		displayResults(result.equals(expected), "Tallest rock in rc4");
 		
 		// Add more tests here
+
 	}
 	
 	public static void testCountVisible() {
@@ -255,7 +256,6 @@ public class A4Tester {
 		
 		
 		// Add more tests here
-		
 	}
 	
 	public static void testCanCross() {
@@ -310,8 +310,6 @@ public class A4Tester {
 		expected = false; // water too high
 		displayResults(result==expected, "can cross rc4 with water level 1");
 	
-		// write more tests here
-		
 	}
 	
 	public static void testStackOperations() {

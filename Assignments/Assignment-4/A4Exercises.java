@@ -97,8 +97,10 @@ public class A4Exercises {
 				return false;
 			} 
 
-			if(previousRock != null && ((previousRock.getHeight()+1) < r.get(i).getHeight())){
-				return false;
+			if(previousRock != null){
+				if((previousRock.getHeight()+1) < r.get(i).getHeight()){
+					return false;
+				}
 			}
 
 			previousRock = r.get(i);
