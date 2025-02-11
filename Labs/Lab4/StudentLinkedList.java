@@ -54,15 +54,18 @@ public class StudentLinkedList implements StudentList {
 			return false;
 		}
 
-		while(cur.getNext() != null){
-			if(cur.getData().getSID() == s.getSID()){
-                return true;
-            }
-			cur = cur.getNext();
-		}
+
 		if(cur.getData().getSID() == s.getSID()){
                 return true;
         }
+		
+		while(cur.getNext() != null){
+			cur = cur.getNext();
+			if(cur.getData().getSID() == s.getSID()){
+                return true;
+            }
+			
+		}
 		return false;
 	}
 	
