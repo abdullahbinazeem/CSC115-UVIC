@@ -197,7 +197,15 @@ public class LinkedBookList {
 	 */
 	public int pagesBeforeBookByAuthor(String authorName) {
 		// TODO: call your recursive helper method here
-		return -1; // so it compiles		
+		return pagesBeforeBookByAuthorRec(authorName, head); // so it compiles		
+	}
+
+	private int pagesBeforeBookByAuthorRec(String authorName, BookNode cur){
+		if(cur == null || cur.getData().getAuthor().equals(authorName)){
+			return 0;
+		} else {
+			return cur.getData().getPages() + pagesBeforeBookByAuthorRec(authorName, cur.next);
+		}
 	}
 
 	/*
@@ -210,9 +218,20 @@ public class LinkedBookList {
 	 */
 	public Book longestBook() {
 		// call your recursive helper method here
-		return null; // so it compiles
+		return longestBookRec(head, head.getData()); // so it compiles
 	}
 	
+	private Book longestBookRec(BookNode cur, Book maxCurrent){
+		if(cur == null){
+			return maxCurrent;
+		} else {
+			if(cur.getData().getPages() > maxCurrent.getPages()){
+				maxCurrent = cur.getData();
+			}
+
+			return longestBookRec(cur.next, maxCurrent);
+		}
+	}
 	/*
 	 * Purpose: get the number of books in the list between the first 
 	 *          two occurrences of books written by authorName
@@ -224,7 +243,27 @@ public class LinkedBookList {
 	 */
 	public int distanceBetweenBooksByAuthor(String authorName) {
 		// TODO: call your recursive helper method here
-		return -1; // so it compiles
+		return distanceBetweenBooksByAuthorRec(authorName, head, false); // so it compiles
+	}
+
+	private int distanceBetweenBooksByAuthorRec(String authorName, BookNode cur, boolean foundBook){
+		if(cur == null){
+			return 0;
+		} else {
+			if(!foundBook){
+				if(cur.getData().getAuthor().equals(authorName)){
+					return distanceBetweenBooksByAuthorRec(authorName, cur.next, !foundBook); //Switch foundBook boolean
+				} else {
+					return distanceBetweenBooksByAuthorRec(authorName, cur.next, foundBook);
+				}
+			} else {
+				if(cur.getData().getAuthor().equals(authorName)){
+					return 0;
+				} else {
+					return 1 + distanceBetweenBooksByAuthorRec(authorName, cur.next, foundBook);
+				}
+			}
+		}
 	}
 	
 }

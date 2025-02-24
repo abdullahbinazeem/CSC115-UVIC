@@ -15,9 +15,9 @@ public class A5Tester {
 		 */
 		testTotalPagesList();
 		testCountLongerThan();
-		// testPagesBeforeBookByAuthor();
-		// testLongestBook();
-		// testDistanceBetweenBooksByAuthor();
+		testPagesBeforeBookByAuthor();
+		testLongestBook();
+		testDistanceBetweenBooksByAuthor();
 		
 		/*
 		 * PART 2:
