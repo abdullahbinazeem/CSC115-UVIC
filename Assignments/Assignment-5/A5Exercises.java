@@ -10,7 +10,19 @@ public class A5Exercises {
 	 */
 	public static int totalBooks(Stack<Book> s) {
 		// TODO: implement this recursively
-		return -1; // so it compiles
+		return totalBooksRec(s); // so it compiles
+	}
+
+	private static int totalBooksRec(Stack<Book> s) {
+		if(s.isEmpty()){
+			return 0;
+		} else {
+			Book removed = s.pop();
+			int count = totalBooksRec(s);
+			s.push(removed);
+
+			return count + 1;
+		}
 	}
 
 	/*
@@ -22,9 +34,21 @@ public class A5Exercises {
 	 */
 	public static int totalPages(Stack<Book> s) {
 		// TODO: implement this recursively
-		return -1; // so it compiles
+		return totalPagesRec(s); // so it compiles
 	}
 	
+	public static int totalPagesRec(Stack<Book> s) {
+		if(s.isEmpty()){
+			return 0;
+		} else {
+			Book removed = s.pop();
+			int count = totalPagesRec(s);
+			s.push(removed);
+
+			return count + removed.getPages();
+		}
+	}
+
 	/*
 	 * Purpose: get the average number of pages of books in s
 	 * Parameters: Stack<Book> s - the stack of books
@@ -52,7 +76,19 @@ public class A5Exercises {
 	 */
 	public static boolean containsBook(Stack<Book> s, Book toFind) {
 		// TODO: implement this recursively
-		return false; // so it compiles
+		return containsBookRec(s, toFind); // so it compiles
+	}
+
+	public static boolean containsBookRec(Stack<Book> s, Book toFind) {
+		if(s.isEmpty()){
+			return false;
+		} else {
+			Book removed = s.pop();
+			boolean found = containsBookRec(s, toFind);
+			s.push(removed);
+
+			return removed == toFind || found;
+		}
 	}
 
 	/*
@@ -66,7 +102,22 @@ public class A5Exercises {
 	public static boolean stackedCorrectly(Stack<Book> s) {
 		// TODO: implement this recursively
 		//       our solution calls a recursive helper method
-		return false; // so it compiles
+		return stackedCorrectlyRec(s, null); // so it compiles
 	}
 
+	public static boolean stackedCorrectlyRec(Stack<Book> s, Book prevRemoved) {
+		if(s.isEmpty()){
+			return true;
+		} else {
+			Book removed = s.pop();
+			boolean found = stackedCorrectlyRec(s, removed);
+			s.push(removed);
+
+			if(prevRemoved != null){
+				return (removed.getPages() > prevRemoved.getPages()) && found;
+			} else {
+				return found; 
+			}
+		}
+	}
 }

@@ -25,11 +25,11 @@ public class A5Tester {
 		 * found in A5Exercises.java, one at a time.
 		 * Documentation can be found in Stack.java
 		 */
-		// testTotalBooks();
-		// testTotalPages();
-		// testAveragePages();
-		// testContainsBook();
-		// testStackedCorrectly();
+		testTotalBooks();
+		testTotalPages();
+		testAveragePages();
+		testContainsBook();
+		testStackedCorrectly();
 		
 		System.out.println("Passed " + testPassCount + " / " + testCount + " tests");
 	}
@@ -316,7 +316,7 @@ public class A5Tester {
 		
 		result = A5Exercises.totalPages(s2);
 		expected = 432 + 487 + 526;
-		// System.out.println(result);
+		//System.out.println(result);
 		displayResults(result==expected, "total pages in s2");
 		
 		result = A5Exercises.totalPages(s3);
