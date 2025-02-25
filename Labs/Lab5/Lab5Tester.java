@@ -40,8 +40,6 @@ public class Lab5Tester {
 		while(!stk.isEmpty()) {
             result = result + stk.pop();
         }
-		// TODO: complete the implementation
-		// WITHOUT declaring any other variables
 		
 		return result;
 	}
