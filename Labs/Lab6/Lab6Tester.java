@@ -18,10 +18,10 @@ public class Lab6Tester {
 			testDoubleAtOddPositions();
 
 			/* tests for methods to be implemented and graded */
-			//testDoubleValues();
-			//testDoubleOddValues();
-			//testProductValues();
-			//testAllNegative();
+			testDoubleValues();
+			testDoubleOddValues();
+			testProductValues();
+			testAllNegative();
 			testIsSortedAscending();
 		} catch (Exception e) {
 			System.out.println("Your code threw an Exception.");
