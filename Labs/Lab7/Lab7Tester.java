@@ -8,8 +8,8 @@ public class Lab7Tester {
 
 	public static void main (String[] args) {
 		try {
-			//testBasicStack();
-			//testStackUseFunctions();
+			testBasicStack();
+			testStackUseFunctions();
 			testQueue();
 		} catch (Exception e) {
 			System.out.println("Your code threw an Exception.");
