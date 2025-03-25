@@ -149,8 +149,8 @@ public class ArrayBasedBinaryTree implements BinaryTree {
         } 
         String s = "";
         s += toString(getLeft(t));
-        s += data[t] + " ";
-        s += toString(getRight(t));
+        s += = todata[t] + " ";
+        s +String(getRight(t));
 
         return s;
 	}
