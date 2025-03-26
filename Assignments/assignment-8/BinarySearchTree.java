@@ -32,11 +32,33 @@ class BinarySearchTree <K extends Comparable<K>, V>  {
 	 * Pre-Conditions: the tree is a valid binary search tree
 	 */
 	public void insert (K key, V value) {
-		insertRec(root, key, value);
+		if(root == null){
+			root = new BSTNode<K,V>(key, value);
+			count++;
+		} else {
+			insertRec(root, key, value);
+		}
 	}
 
 	private void insertRec(BSTNode<K,V> node,K key, V value){
-
+		if(key.compareTo(node.key) == 0){
+			node.value = value;
+			node.key = key;
+		} else if(key.compareTo(node.key) > 0){
+			if(node.right == null){
+				node.right = new BSTNode<K,V>(key,value);
+				count++;
+			} else {
+				insertRec(node.right, key, value);
+			}
+		} else {
+			if(node.left == null){
+				node.left = new BSTNode<K,V>(key,value);
+				count++;
+			} else {
+				insertRec(node.left, key, value);
+			}
+		}
 	}
 
 	/* 	
@@ -47,8 +69,27 @@ class BinarySearchTree <K extends Comparable<K>, V>  {
 	 * Throws: KeyNotFoundException if key isn't in the tree
 	 */
 	public V find (K key) throws KeyNotFoundException {
-		// TODO: implement this
-		throw new KeyNotFoundException();
+		try {
+			return findRec(key, root);
+		} catch (KeyNotFoundException e){
+			throw new KeyNotFoundException();
+		}
+	}
+
+	private V findRec(K key, BSTNode<K,V> node) throws KeyNotFoundException {
+		if(node == null){
+			throw new KeyNotFoundException();
+		}
+
+		if(key.compareTo(node.key) == 0){
+			return node.value;
+		}
+
+		if(key.compareTo(node.key) > 0){
+			return findRec(key, node.right);
+		} else {
+			return findRec(key, node.left);
+		}
 	}
 
 	/* 	
@@ -57,8 +98,7 @@ class BinarySearchTree <K extends Comparable<K>, V>  {
 	 * Returns: int - the number of nodes in the tree. 
 	 */
 	public int size() {
-		// TODO: implement this
-		return -1; // so it compiles
+		return count;
 	}
 
 	/*
@@ -67,7 +107,7 @@ class BinarySearchTree <K extends Comparable<K>, V>  {
 	 * Returns: nothing
 	 */
 	public void clear() {
-		// TODO: implement this
+		root = null;
 	}
 
 	/* 
@@ -83,8 +123,15 @@ class BinarySearchTree <K extends Comparable<K>, V>  {
 	 * See the assignment PDF and the test program for examples.
 	 */
 	public int height() {
-		// TODO: implement this
-		return -1; // so it compiles
+		return heightRec(root); 
+	}
+
+	private int heightRec(BSTNode<K,V> node){
+		if(node == null){
+			return -1;
+		}
+
+		return 1 + Math.max(heightRec(node.right), heightRec(node.left));
 	}
 
 	/* 
@@ -127,7 +174,23 @@ class BinarySearchTree <K extends Comparable<K>, V>  {
 		// queue of nodes that need to be added
 		LinkedList<BSTNode<K,V>> q = new LinkedList<BSTNode<K,V> >();
 		
-		// TODO: implement this
+		q.addLast(root);
+
+		while (!q.isEmpty()){
+			BSTNode<K,V> node = q.removeFirst();
+
+			Entry<K,V> entry = new Entry<K,V>(node.key, node.value);
+			l.add(entry);
+
+			if(node.left != null){
+				q.addLast(node.left);
+			}
+
+			if(node.right != null){
+				q.addLast(node.right);
+			}
+		}
+		
 		return l;
 	}
 
@@ -159,17 +222,35 @@ class BinarySearchTree <K extends Comparable<K>, V>  {
 	}
 
 	private void inOrderRec (BSTNode<K,V> n, List <Entry<K,V>> entries) {
-		// TODO: implement this so it adds all of the elements in
-		// the tree to the entries list with an in-order traversal
+		if(n == null){
+			return;
+		}
+		Entry<K,V> entry = new Entry<K,V>(n.key, n.value);
+
+		inOrderRec(n.left, entries);
+		entries.add(entry);
+		inOrderRec(n.right, entries);
 	}
 
 	private void preOrderRec (BSTNode<K,V> n, List <Entry<K,V>> entries) {
-		// TODO: implement this so it adds all of the elements in
-		// the tree to the entries list with a pre-order traversal
+		if(n == null){
+			return;
+		}
+		Entry<K,V> entry = new Entry<K,V>(n.key, n.value);
+
+		entries.add(entry);
+		preOrderRec(n.left, entries);
+		preOrderRec(n.right, entries);
 	}
 
 	private void postOrderRec (BSTNode<K,V> n, List <Entry<K,V>> entries) {
-		// TODO: implement this so it adds all of the elements in
-		// the tree to the entries list with a post-order traversal
+		if(n == null){
+			return;
+		}
+		Entry<K,V> entry = new Entry<K,V>(n.key, n.value);
+
+		postOrderRec(n.left, entries);
+		postOrderRec(n.right, entries);
+		entries.add(entry);
 	}
 }

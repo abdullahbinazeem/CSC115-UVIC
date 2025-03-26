@@ -74,12 +74,12 @@ public class A8Tester {
 			test_insert_find();
 
 			tree1_test();
-			// tree2_test();
-			// tree3_test();
-			// tree4_test();
+			tree2_test();
+			tree3_test();
+			tree4_test();
 
-			// map1_test();
-			// map2_test();
+			map1_test();
+			map2_test();
 		}
 		catch (Exception e) {
 			System.out.println("Unhandled exception in tester: " + e);
@@ -141,8 +141,6 @@ public class A8Tester {
 
 		l = t.entryList(BinarySearchTree.BST_PREORDER);
 		compare_lists (tree1_keys_preorder, tree1_values_preorder, tree1_size, l);
-
-
 
 		l = t.entryList(BinarySearchTree.BST_POSTORDER);
 		compare_lists (tree1_keys_postorder, tree1_values_postorder, tree1_size, l);
@@ -274,8 +272,8 @@ public class A8Tester {
 		t.insert("abe", "abedata");
 		t.insert("jane", "janedata");
 		
-		// TreeView tv = new TreeView<String,String>(t);
-		// tv.dotPrint();
+		TreeView tv = new TreeView<String,String>(t);
+		tv.dotPrint();
 
 		/* If you are failing these tests, try uncommenting the TreeView code
 		* above then copying and pasting the resulting output into the web page:

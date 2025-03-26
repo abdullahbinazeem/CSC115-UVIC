@@ -9,31 +9,33 @@ public class BSTMap<K extends Comparable<K>, V > implements  Map<K, V>  {
 	}
 
 	public boolean containsKey(K key) {
-		// TODO: implement this
-		return false; // so it compiles
+		try {
+			bst.find(key);
+			return true;
+		} catch (KeyNotFoundException e){
+			return false;
+		}
 	}
+
 
 	public V get (K key) throws KeyNotFoundException {
-		// TODO: implement this
-		return null; // so it compiles
+		return bst.find(key); 
 	}
 
-	public List<Entry<K,V> >	entryList() {
-		// TODO: implement this
-		return null; // so it compiles
+	public List<Entry<K,V>> entryList() {
+		return bst.entryList();
 	}
 
 	public void put (K key, V value) {
-		// TODO: implement this
+		bst.insert(key, value);
 	}
 
 	public int size() {
-		// TODO: implement this
-		return -1; // so it compiles
+		return bst.size();
 	}
 
 	public void clear() {
-		// TODO: implement this
+		bst.clear();
 	}
 
 }
